@@ -47,6 +47,66 @@ class _AmortisationForm extends State<MainForm> {
                   ),
                 ),
               ),
+              //Need to insert date picker
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Loan Amount',
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Payment Amount',
+                  ),
+                ),
+              ),
+              //Add to row with below
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Number of Payments',
+                  ),
+                ),
+              ),
+              //Need to Add DropDown Menu (Yearly, Quarterly, Monthly, Weekly)
+              //Add to row with above
+              //Add to row with below
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Lump Sum Payment',
+                  ),
+                ),
+              ),
+              //Need to Add DropDown Menu (None, Upfront, Balloon)
+              //Add to row with above
+
+              //Add to row with below
+              /*Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                child: TextButton(
+                  onPressed: () {},//Need to do something...
+                  child: Text ('Calculate'),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                child: TextButton(
+                  onPressed: () {},//Need to do something
+                  child: Text ('Clear'),
+                ),
+              ),*/
+              //Add to row with above
             ],
           ),
         ),
