@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'amortisation_schedule.dart';
 
 class MainForm extends StatefulWidget {
   const MainForm({super.key});
@@ -6,6 +7,9 @@ class MainForm extends StatefulWidget {
   @override
   State<MainForm> createState() => _AmortisationForm();
 }
+
+var paymentsPerYear = 1; //will fix later
+var lumpSumType = 101; //will fix later
 
 class _AmortisationForm extends State<MainForm> {
   @override
@@ -17,8 +21,8 @@ class _AmortisationForm extends State<MainForm> {
           padding: const EdgeInsets.symmetric(vertical: 32),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const <Widget>[
-              Padding(
+            children: <Widget>[
+              const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                 child: TextField(
                   decoration: InputDecoration(
@@ -27,7 +31,7 @@ class _AmortisationForm extends State<MainForm> {
                   ),
                 ),
               ),
-              Padding(
+              const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                 child: TextField(
                   decoration: InputDecoration(
@@ -37,7 +41,7 @@ class _AmortisationForm extends State<MainForm> {
                   ),
                 ),
               ),
-              Padding(
+              const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                 child: TextField(
                   decoration: InputDecoration(
@@ -48,7 +52,7 @@ class _AmortisationForm extends State<MainForm> {
                 ),
               ),
               //Need to insert date picker
-              Padding(
+              const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                 child: TextField(
                   decoration: InputDecoration(
@@ -57,7 +61,7 @@ class _AmortisationForm extends State<MainForm> {
                   ),
                 ),
               ),
-              Padding(
+              const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                 child: TextField(
                   decoration: InputDecoration(
@@ -66,47 +70,144 @@ class _AmortisationForm extends State<MainForm> {
                   ),
                 ),
               ),
-              //Add to row with below
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Number of Payments',
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  const Flexible(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Number of Payments',
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              //Need to Add DropDown Menu (Yearly, Quarterly, Monthly, Weekly)
-              //Add to row with above
-              //Add to row with below
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Lump Sum Payment',
+                  Flexible(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 8),
+                      //This is to put border but to big
+                      child: InputDecorator(
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                        ),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton<int>(
+                            items: const [
+                              DropdownMenuItem(
+                                value: 1,
+                                child: Text('Yearly'),
+                              ),
+                              DropdownMenuItem(
+                                value: 4,
+                                child: Text('Quarterly'),
+                              ),
+                              DropdownMenuItem(
+                                value: 12,
+                                child: Text('Monthly'),
+                              ),
+                              DropdownMenuItem(
+                                value: 52,
+                                child: Text('Weekly'),
+                              ),
+                            ],
+                            value: paymentsPerYear,
+                            hint: const Text('Payments Per Year'),
+                            onChanged: (value) {
+                              setState(
+                                () {
+                                  paymentsPerYear = 1;
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
-              //Need to Add DropDown Menu (None, Upfront, Balloon)
-              //Add to row with above
-
-              //Add to row with below
-              /*Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                child: TextButton(
-                  onPressed: () {},//Need to do something...
-                  child: Text ('Calculate'),
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  const Flexible(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Lump Sum Payment',
+                        ),
+                      ),
+                    ),
+                  ),
+                  Flexible(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 8),
+                      //This is to put border but to big
+                      child: InputDecorator(
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                        ),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton<int>(
+                            items: const [
+                              DropdownMenuItem(
+                                value: 101,
+                                child: Text('Upfront'),
+                              ),
+                              DropdownMenuItem(
+                                value: 102,
+                                child: Text('Balloon'),
+                              ),
+                            ],
+                            value: lumpSumType,
+                            hint: const Text('None'),
+                            onChanged: (value) {
+                              setState(
+                                () {
+                                  lumpSumType = 101;
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                child: TextButton(
-                  onPressed: () {},//Need to do something
-                  child: Text ('Clear'),
-                ),
-              ),*/
-              //Add to row with above
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AmortisationSchedule(),
+                          ),
+                        );
+                      },
+                      child: const Text('Calculate'),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      child: const Text('Clear'),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
