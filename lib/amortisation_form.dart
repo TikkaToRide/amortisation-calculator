@@ -8,8 +8,8 @@ class MainForm extends StatefulWidget {
   State<MainForm> createState() => _AmortisationForm();
 }
 
-var paymentsPerYear = 1; //will fix later
-var lumpSumType = 101; //will fix later
+var paymentsPerYear;
+var lumpSumType;
 
 class _AmortisationForm extends State<MainForm> {
   @override
@@ -17,10 +17,11 @@ class _AmortisationForm extends State<MainForm> {
     return SingleChildScrollView(
       child: Center(
         child: Container(
-          constraints: const BoxConstraints(maxWidth: 500),
+          constraints: const BoxConstraints(maxWidth: 400),
           padding: const EdgeInsets.symmetric(vertical: 32),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            //crossAxisAlignment: CrossAxisAlignment.center,
+            //mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
@@ -88,13 +89,14 @@ class _AmortisationForm extends State<MainForm> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 8, vertical: 8),
-                      //This is to put border but to big
+                      //This border is slightly to big
                       child: InputDecorator(
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                         ),
                         child: DropdownButtonHideUnderline(
                           child: DropdownButton<int>(
+                            isDense: true,
                             items: const [
                               DropdownMenuItem(
                                 value: 1,
@@ -118,7 +120,7 @@ class _AmortisationForm extends State<MainForm> {
                             onChanged: (value) {
                               setState(
                                 () {
-                                  paymentsPerYear = 1;
+                                  paymentsPerYear = value;
                                 },
                               );
                             },
@@ -147,13 +149,14 @@ class _AmortisationForm extends State<MainForm> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 8, vertical: 8),
-                      //This is to put border but to big
+                      //This border is slightly to big
                       child: InputDecorator(
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                         ),
                         child: DropdownButtonHideUnderline(
                           child: DropdownButton<int>(
+                            isDense: true,
                             items: const [
                               DropdownMenuItem(
                                 value: 101,
@@ -169,7 +172,7 @@ class _AmortisationForm extends State<MainForm> {
                             onChanged: (value) {
                               setState(
                                 () {
-                                  lumpSumType = 101;
+                                  lumpSumType = value;
                                 },
                               );
                             },
