@@ -8,10 +8,46 @@ class MainForm extends StatefulWidget {
   State<MainForm> createState() => _AmortisationForm();
 }
 
-var paymentsPerYear;
-var lumpSumType;
-
 class _AmortisationForm extends State<MainForm> {
+  final clientName = TextEditingController();
+  final financeCompany = TextEditingController();
+  final assetPurchased = TextEditingController();
+  final dateOfFirstPayment = TextEditingController();
+  final loanAmount = TextEditingController();
+  final paymentAmount = TextEditingController();
+  final numberOfPayments = TextEditingController();
+  final lumpSumAmount = TextEditingController();
+
+//Will need below later
+/*  @override
+  void initState() {
+    super.initState();
+    clientName.addListener(tranferToSchedule);
+    financeCompany.addListener(tranferToSchedule);
+    assetPurchased.addListener(tranferToSchedule);
+    dateOfFirstPayment.addListener(tranferToSchedule);
+    loanAmount.addListener(tranferToSchedule);
+    paymentAmount.addListener(tranferToSchedule);
+    numberOfPayments.addListener(tranferToSchedule);
+    lumpSumAmount.addListener(tranferToSchedule);
+  }*/
+
+  @override
+  void dispose() {
+    clientName.dispose();
+    financeCompany.dispose();
+    assetPurchased.dispose();
+    dateOfFirstPayment.dispose();
+    loanAmount.dispose();
+    paymentAmount.dispose();
+    numberOfPayments.dispose();
+    lumpSumAmount.dispose();
+    super.dispose();
+  }
+
+  var paymentsPerYear;
+  var lumpSumType;
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -23,29 +59,32 @@ class _AmortisationForm extends State<MainForm> {
             //crossAxisAlignment: CrossAxisAlignment.center,
             //mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                 child: TextField(
-                  decoration: InputDecoration(
+                  controller: clientName,
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Client Name',
                   ),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                 child: TextField(
-                  decoration: InputDecoration(
+                  controller: financeCompany,
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Finance Company',
                     hintText: 'Toyota Finance', //don't know if i should keep
                   ),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                 child: TextField(
-                  decoration: InputDecoration(
+                  controller: assetPurchased,
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Asset Purchased',
                     hintText: 'Toyota Camry (S123ABC)',
@@ -53,19 +92,21 @@ class _AmortisationForm extends State<MainForm> {
                 ),
               ),
               //Need to insert date picker
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                 child: TextField(
-                  decoration: InputDecoration(
+                  controller: loanAmount,
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Loan Amount',
                   ),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                 child: TextField(
-                  decoration: InputDecoration(
+                  controller: paymentAmount,
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Payment Amount',
                   ),
@@ -74,11 +115,13 @@ class _AmortisationForm extends State<MainForm> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const Flexible(
+                  Flexible(
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 8),
                       child: TextField(
-                        decoration: InputDecoration(
+                        controller: numberOfPayments,
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'Number of Payments',
                         ),
@@ -134,11 +177,13 @@ class _AmortisationForm extends State<MainForm> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const Flexible(
+                  Flexible(
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 8),
                       child: TextField(
-                        decoration: InputDecoration(
+                        controller: lumpSumAmount,
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'Lump Sum Payment',
                         ),
@@ -191,12 +236,18 @@ class _AmortisationForm extends State<MainForm> {
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const AmortisationSchedule(),
-                          ),
-                        );
+                        if (clientName.text == '') {
+                          //Need to fix tip trigger
+                          helpMessage(context);
+                        } else {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const AmortisationSchedule(),
+                            ),
+                          );
+                        }
                       },
                       child: const Text('Calculate'),
                     ),
@@ -205,8 +256,19 @@ class _AmortisationForm extends State<MainForm> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                     child: ElevatedButton(
-                      onPressed: () {},
-                      child: const Text('Clear'),
+                      onPressed: () {
+                        clientName.clear();
+                        financeCompany.clear();
+                        assetPurchased.clear();
+                        dateOfFirstPayment.clear();
+                        loanAmount.clear();
+                        paymentAmount.clear();
+                        numberOfPayments.clear();
+                        //paymentsPerYear;
+                        lumpSumAmount.clear();
+                        //lumpSumType;
+                      },
+                      child: const Text('Reset'),
                     ),
                   ),
                 ],
@@ -217,4 +279,19 @@ class _AmortisationForm extends State<MainForm> {
       ),
     );
   }
+}
+
+helpMessage(context) {
+  return showDialog(
+    context: context,
+    builder: (BuildContext context) => AlertDialog(
+      title: const Text('Tip'),
+      content: const Text('Make sure all fields are completed'),
+      actions: <Widget>[
+        TextButton(
+            onPressed: () => Navigator.pop(context, 'Close'),
+            child: const Text('Close'))
+      ],
+    ),
+  );
 }
