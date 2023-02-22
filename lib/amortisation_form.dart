@@ -8,29 +8,32 @@ class MainForm extends StatefulWidget {
   State<MainForm> createState() => _AmortisationForm();
 }
 
-class _AmortisationForm extends State<MainForm> {
-  final clientName = TextEditingController();
-  final financeCompany = TextEditingController();
-  final assetPurchased = TextEditingController();
-  final dateOfFirstPayment = TextEditingController();
-  final loanAmount = TextEditingController();
-  final paymentAmount = TextEditingController();
-  final numberOfPayments = TextEditingController();
-  final lumpSumAmount = TextEditingController();
+final clientName = TextEditingController();
+final financeCompany = TextEditingController();
+final assetPurchased = TextEditingController();
+final dateOfFirstPayment = TextEditingController();
+final loanAmount = TextEditingController();
+final paymentAmount = TextEditingController();
+final numberOfPayments = TextEditingController();
+final lumpSumAmount = TextEditingController();
 
+var paymentsPerYear;
+var lumpSumType;
+
+class _AmortisationForm extends State<MainForm> {
 //Will need below later
-/*  @override
+  @override
   void initState() {
     super.initState();
-    clientName.addListener(tranferToSchedule);
+    /*clientName.addListener(tranferToSchedule);
     financeCompany.addListener(tranferToSchedule);
     assetPurchased.addListener(tranferToSchedule);
     dateOfFirstPayment.addListener(tranferToSchedule);
     loanAmount.addListener(tranferToSchedule);
     paymentAmount.addListener(tranferToSchedule);
     numberOfPayments.addListener(tranferToSchedule);
-    lumpSumAmount.addListener(tranferToSchedule);
-  }*/
+    lumpSumAmount.addListener(tranferToSchedule);*/
+  }
 
   @override
   void dispose() {
@@ -44,9 +47,6 @@ class _AmortisationForm extends State<MainForm> {
     lumpSumAmount.dispose();
     super.dispose();
   }
-
-  var paymentsPerYear;
-  var lumpSumType;
 
   @override
   Widget build(BuildContext context) {
@@ -236,7 +236,11 @@ class _AmortisationForm extends State<MainForm> {
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                     child: ElevatedButton(
                       onPressed: () {
-                        if (clientName.text == '') {
+                        if (/*dateOfFirstPayment.text == ''||*/
+                            loanAmount.text == '' ||
+                                paymentAmount.text == '' ||
+                                numberOfPayments.text == '' ||
+                                paymentsPerYear == null) {
                           //Need to fix tip trigger
                           helpMessage(context);
                         } else {
@@ -257,16 +261,11 @@ class _AmortisationForm extends State<MainForm> {
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                     child: ElevatedButton(
                       onPressed: () {
-                        clientName.clear();
-                        financeCompany.clear();
-                        assetPurchased.clear();
-                        dateOfFirstPayment.clear();
-                        loanAmount.clear();
-                        paymentAmount.clear();
-                        numberOfPayments.clear();
-                        //paymentsPerYear;
-                        lumpSumAmount.clear();
-                        //lumpSumType;
+                        resetForm();
+                        setState(() {
+                          paymentsPerYear = null;
+                          lumpSumType = null;
+                        });
                       },
                       child: const Text('Reset'),
                     ),
@@ -294,4 +293,15 @@ helpMessage(context) {
       ],
     ),
   );
+}
+
+void resetForm() {
+  clientName.clear();
+  financeCompany.clear();
+  assetPurchased.clear();
+  //dateOfFirstPayment.clear(); ***First need to add date input box***
+  loanAmount.clear();
+  paymentAmount.clear();
+  numberOfPayments.clear();
+  lumpSumAmount.clear();
 }
