@@ -21,19 +21,21 @@ var paymentsPerYear;
 var lumpSumType;
 
 class _AmortisationForm extends State<MainForm> {
-//Will need below later
-  @override
+//Don't think I need below listeners, will leave just in case
+
+  /*@override
   void initState() {
     super.initState();
-    /*clientName.addListener(tranferToSchedule);
+    clientName.addListener(tranferToSchedule);
     financeCompany.addListener(tranferToSchedule);
     assetPurchased.addListener(tranferToSchedule);
     dateOfFirstPayment.addListener(tranferToSchedule);
     loanAmount.addListener(tranferToSchedule);
     paymentAmount.addListener(tranferToSchedule);
     numberOfPayments.addListener(tranferToSchedule);
-    lumpSumAmount.addListener(tranferToSchedule);*/
+    lumpSumAmount.addListener(tranferToSchedule);
   }
+  */
 
   @override
   void dispose() {
@@ -56,8 +58,6 @@ class _AmortisationForm extends State<MainForm> {
           constraints: const BoxConstraints(maxWidth: 400),
           padding: const EdgeInsets.symmetric(vertical: 32),
           child: Column(
-            //crossAxisAlignment: CrossAxisAlignment.center,
-            //mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
@@ -76,7 +76,7 @@ class _AmortisationForm extends State<MainForm> {
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Finance Company',
-                    hintText: 'Toyota Finance', //don't know if i should keep
+                    hintText: 'Toyota Finance',
                   ),
                 ),
               ),
@@ -244,13 +244,7 @@ class _AmortisationForm extends State<MainForm> {
                           //Need to fix tip trigger
                           helpMessage(context);
                         } else {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const AmortisationSchedule(),
-                            ),
-                          );
+                          transferDataToSchedule(context);
                         }
                       },
                       child: const Text('Calculate'),
@@ -305,3 +299,33 @@ void resetForm() {
   numberOfPayments.clear();
   lumpSumAmount.clear();
 }
+
+void transferDataToSchedule(BuildContext context) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => AmortisationSchedule(
+        client: clientName,
+        financier: financeCompany,
+        asset: assetPurchased,
+        //Need to add other stuff to transfer
+      ),
+    ),
+  );
+}
+
+getPaymentsPerYear(value) {
+  switch (paymentsPerYear) {
+    case 1:
+      return 1; //yearly payment
+    case 4:
+      return 4; //quarterly payment
+    case 12:
+      return 12; //monthly payment
+    case 52:
+      return 52; //weekly payment
+    default:
+  }
+}
+
+calculateInterestRate() {}
