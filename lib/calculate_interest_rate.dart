@@ -1,7 +1,12 @@
 import 'dart:math';
 import 'package:amortisation_calculator/amortisation_form.dart';
 
-//Values do not reset when form is reset???
+/*
+This code is based on 'Answer' found at below link.
+https://stackoverflow.com/questions/3102476/calculating-annual-percentage-rate-need-some-help-with-inherited-code
+*/
+
+//Values do not reset when form is reset - need to fix
 double principal = double.parse(loanAmount.text);
 double payment = double.parse(paymentAmount.text);
 int term = int.parse(numberOfPayments.text);
@@ -22,9 +27,9 @@ double calculateInterest() {
   var tolerableError = 0.00001;
   var currentGuess = 0.05 / paymentsPerYear;
   for (var i = 0; i < 20; i++) {
-    var oldGuess = currentGuess;
-    currentGuess = oldGuess - f(oldGuess) / fPrime(oldGuess);
-    var guessDifference = (currentGuess - oldGuess).abs();
+    var priorGuess = currentGuess;
+    currentGuess = priorGuess - f(priorGuess) / fPrime(priorGuess);
+    var guessDifference = (currentGuess - priorGuess).abs();
     if (guessDifference < tolerableError) {
       break;
     }
