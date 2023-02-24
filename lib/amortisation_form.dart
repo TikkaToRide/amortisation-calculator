@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'amortisation_schedule.dart';
+import 'calculate_interest_rate.dart';
 
 class MainForm extends StatefulWidget {
   const MainForm({super.key});
@@ -21,22 +22,6 @@ var paymentsPerYear;
 var lumpSumType;
 
 class _AmortisationForm extends State<MainForm> {
-//Don't think I need below listeners, will leave just in case
-
-  /*@override
-  void initState() {
-    super.initState();
-    clientName.addListener(tranferToSchedule);
-    financeCompany.addListener(tranferToSchedule);
-    assetPurchased.addListener(tranferToSchedule);
-    dateOfFirstPayment.addListener(tranferToSchedule);
-    loanAmount.addListener(tranferToSchedule);
-    paymentAmount.addListener(tranferToSchedule);
-    numberOfPayments.addListener(tranferToSchedule);
-    lumpSumAmount.addListener(tranferToSchedule);
-  }
-  */
-
   @override
   void dispose() {
     clientName.dispose();
@@ -96,6 +81,7 @@ class _AmortisationForm extends State<MainForm> {
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                 child: TextField(
                   controller: loanAmount,
+                  keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Loan Amount',
@@ -106,6 +92,7 @@ class _AmortisationForm extends State<MainForm> {
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                 child: TextField(
                   controller: paymentAmount,
+                  keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Payment Amount',
@@ -121,6 +108,7 @@ class _AmortisationForm extends State<MainForm> {
                           horizontal: 8, vertical: 8),
                       child: TextField(
                         controller: numberOfPayments,
+                        keyboardType: TextInputType.number,
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'Number of Payments',
@@ -183,6 +171,7 @@ class _AmortisationForm extends State<MainForm> {
                           horizontal: 8, vertical: 8),
                       child: TextField(
                         controller: lumpSumAmount,
+                        keyboardType: TextInputType.number,
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'Lump Sum Payment',
@@ -308,24 +297,12 @@ void transferDataToSchedule(BuildContext context) {
         client: clientName,
         financier: financeCompany,
         asset: assetPurchased,
-        //Need to add other stuff to transfer
+        loan: loanAmount.text,
+        payment: paymentAmount.text,
+        term: numberOfPayments.text,
+        lumpSum: lumpSumAmount.text,
+        interestRate: calculateInterest(),
       ),
     ),
   );
 }
-
-getPaymentsPerYear(value) {
-  switch (paymentsPerYear) {
-    case 1:
-      return 1; //yearly payment
-    case 4:
-      return 4; //quarterly payment
-    case 12:
-      return 12; //monthly payment
-    case 52:
-      return 52; //weekly payment
-    default:
-  }
-}
-
-calculateInterestRate() {}

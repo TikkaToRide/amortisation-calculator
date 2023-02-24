@@ -1,15 +1,27 @@
+import 'package:amortisation_calculator/calculate_interest_rate.dart';
 import 'package:flutter/material.dart';
+import 'amortisation_form.dart';
 
 class AmortisationSchedule extends StatelessWidget {
   final client;
   final financier;
   final asset;
+  final loan;
+  final payment;
+  final term;
+  final lumpSum;
+  final interestRate;
 
   const AmortisationSchedule({
     super.key,
     required this.client,
     required this.financier,
     required this.asset,
+    required this.loan,
+    required this.payment,
+    required this.term,
+    required this.lumpSum,
+    required this.interestRate,
   });
 
   @override
@@ -33,29 +45,30 @@ class AmortisationSchedule extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Align(
+                Align(
                   alignment: Alignment.topLeft,
-                  child: Text('Loan Amount: '),
+                  child: Text('Loan Amount: $loan'),
                 ),
-                const Align(
+                Align(
                   alignment: Alignment.topLeft,
-                  child: Text('Payment Amount: '),
+                  child: Text('Payment Amount: $payment'),
                 ),
-                const Align(
+                Align(
                   alignment: Alignment.topLeft,
-                  child: Text('Interest Rate: '),
+                  child: Text(
+                      'Interest Rate: ${((calculateInterest() * paymentsPerYear) * 100).toStringAsFixed(2)}%'),
                 ),
-                const Align(
+                Align(
                   alignment: Alignment.topLeft,
-                  child: Text('Number of Payments: '),
+                  child: Text('Interest per period: $interestRate'),
                 ),
-                const Align(
+                Align(
                   alignment: Alignment.topLeft,
-                  child: Text('Lump Sum Amount: '),
+                  child: Text('Number of Payments: $term'),
                 ),
-                const Align(
+                Align(
                   alignment: Alignment.topLeft,
-                  child: Text('Payments Frequency: '),
+                  child: Text('Lump Sum Amount: $lumpSum'),
                 ),
                 const Align(
                   alignment: Alignment.topLeft,
