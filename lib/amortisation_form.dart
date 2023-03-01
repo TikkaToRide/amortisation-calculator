@@ -13,7 +13,7 @@ class MainForm extends StatefulWidget {
 final clientName = TextEditingController();
 final financeCompany = TextEditingController();
 final assetPurchased = TextEditingController();
-TextEditingController dateOfFirstPayment = TextEditingController();
+final dateOfFirstPayment = TextEditingController();
 final loanAmount = TextEditingController();
 final paymentAmount = TextEditingController();
 final numberOfPayments = TextEditingController();
@@ -82,9 +82,10 @@ class _AmortisationForm extends State<MainForm> {
                 child: TextField(
                   controller: dateOfFirstPayment,
                   decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Date Of First Payment',
-                      suffixIcon: Icon(Icons.date_range)),
+                    border: OutlineInputBorder(),
+                    labelText: 'Date Of First Payment',
+                    suffixIcon: Icon(Icons.date_range),
+                  ),
                   readOnly: true,
                   onTap: () => getDate(
                     context: context,
@@ -239,12 +240,11 @@ class _AmortisationForm extends State<MainForm> {
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                     child: ElevatedButton(
                       onPressed: () {
-                        if (/*dateOfFirstPayment.text == ''||*/
+                        if (dateOfFirstPayment.text == '' ||
                             loanAmount.text == '' ||
-                                paymentAmount.text == '' ||
-                                numberOfPayments.text == '' ||
-                                paymentsPerYear == null) {
-                          //Need to fix tip trigger
+                            paymentAmount.text == '' ||
+                            numberOfPayments.text == '' ||
+                            paymentsPerYear == null) {
                           helpMessage(context);
                         } else {
                           transferDataToSchedule(context);
@@ -298,8 +298,9 @@ helpMessage(context) {
       content: const Text('Make sure all fields are completed'),
       actions: <Widget>[
         TextButton(
-            onPressed: () => Navigator.pop(context, 'Close'),
-            child: const Text('Close'))
+          onPressed: () => Navigator.pop(context, 'Close'),
+          child: const Text('Close'),
+        ),
       ],
     ),
   );
@@ -309,7 +310,7 @@ void resetForm() {
   clientName.clear();
   financeCompany.clear();
   assetPurchased.clear();
-  dateOfFirstPayment.clear(); //***First need to add date input box***
+  dateOfFirstPayment.clear();
   loanAmount.clear();
   paymentAmount.clear();
   numberOfPayments.clear();
