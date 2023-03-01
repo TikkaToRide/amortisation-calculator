@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'amortisation_schedule.dart';
 import 'calculate_interest_rate.dart';
+import 'package:intl/intl.dart';
 
 class MainForm extends StatefulWidget {
   const MainForm({super.key});
@@ -12,7 +13,7 @@ class MainForm extends StatefulWidget {
 final clientName = TextEditingController();
 final financeCompany = TextEditingController();
 final assetPurchased = TextEditingController();
-final dateOfFirstPayment = TextEditingController();
+TextEditingController dateOfFirstPayment = TextEditingController();
 final loanAmount = TextEditingController();
 final paymentAmount = TextEditingController();
 final numberOfPayments = TextEditingController();
@@ -76,7 +77,20 @@ class _AmortisationForm extends State<MainForm> {
                   ),
                 ),
               ),
-              //Need to insert date picker
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                child: TextField(
+                  controller: dateOfFirstPayment,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Date Of First Payment',
+                      suffixIcon: Icon(Icons.date_range)),
+                  readOnly: true,
+                  onTap: () => getDate(
+                    context: context,
+                  ),
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                 child: TextField(
@@ -263,6 +277,19 @@ class _AmortisationForm extends State<MainForm> {
   }
 }
 
+getDate({required BuildContext context}) async {
+  DateTime? dateSelected = await showDatePicker(
+    context: context,
+    initialDate: DateTime.now(),
+    firstDate: DateTime(2000),
+    lastDate: DateTime.now(),
+  );
+  if (dateSelected != null) {
+    return dateOfFirstPayment.text =
+        DateFormat('dd MMMM yyyy').format(dateSelected);
+  }
+}
+
 helpMessage(context) {
   return showDialog(
     context: context,
@@ -282,7 +309,7 @@ void resetForm() {
   clientName.clear();
   financeCompany.clear();
   assetPurchased.clear();
-  //dateOfFirstPayment.clear(); ***First need to add date input box***
+  dateOfFirstPayment.clear(); //***First need to add date input box***
   loanAmount.clear();
   paymentAmount.clear();
   numberOfPayments.clear();
