@@ -264,7 +264,7 @@ class _AmortisationForm extends State<MainForm> {
                           lumpSumType = null;
                         });
                       },
-                      child: const Text('Reset'),
+                      child: const Text('   Reset   '),
                     ),
                   ),
                 ],
@@ -325,6 +325,7 @@ void transferDataToSchedule(BuildContext context) {
         client: clientName,
         financier: financeCompany,
         asset: assetPurchased,
+        date: dateOfFirstPayment.text,
         loan: loanAmount.text,
         payment: paymentAmount.text,
         term: numberOfPayments.text,

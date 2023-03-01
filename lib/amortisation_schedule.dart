@@ -6,6 +6,7 @@ class AmortisationSchedule extends StatelessWidget {
   final client;
   final financier;
   final asset;
+  final date;
   final loan;
   final payment;
   final term;
@@ -17,6 +18,7 @@ class AmortisationSchedule extends StatelessWidget {
     required this.client,
     required this.financier,
     required this.asset,
+    required this.date,
     required this.loan,
     required this.payment,
     required this.term,
@@ -56,6 +58,12 @@ class AmortisationSchedule extends StatelessWidget {
                 Align(
                   alignment: Alignment.topLeft,
                   child: Text(
+                    'Date of First Payment: $date',
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
                       'Interest Rate: ${((calculateInterest() * paymentsPerYear) * 100).toStringAsFixed(2)}%'),
                 ),
                 Align(
@@ -78,7 +86,7 @@ class AmortisationSchedule extends StatelessWidget {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: const Text('Back'),
+                  child: const Text('Back To Form'),
                 ),
               ],
             ),
