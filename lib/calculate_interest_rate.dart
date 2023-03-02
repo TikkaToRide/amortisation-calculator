@@ -1,5 +1,5 @@
 import 'dart:math';
-import 'package:amortisation_calculator/amortisation_form.dart';
+import 'amortisation_form.dart';
 
 /*
 This code is based on 'Answer' found at below link.

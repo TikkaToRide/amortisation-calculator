@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:amortisation_calculator/calculate_interest_rate.dart';
 import 'amortisation_form.dart';
+import 'calculate_interest_rate.dart';
 
 class AmortisationSchedule extends StatelessWidget {
   final client;
