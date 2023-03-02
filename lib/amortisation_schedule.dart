@@ -1,5 +1,5 @@
-import 'package:amortisation_calculator/calculate_interest_rate.dart';
 import 'package:flutter/material.dart';
+import 'package:amortisation_calculator/calculate_interest_rate.dart';
 import 'amortisation_form.dart';
 
 class AmortisationSchedule extends StatelessWidget {
@@ -11,7 +11,6 @@ class AmortisationSchedule extends StatelessWidget {
   final payment;
   final term;
   final lumpSum;
-  final interestRate;
 
   const AmortisationSchedule({
     super.key,
@@ -23,7 +22,6 @@ class AmortisationSchedule extends StatelessWidget {
     required this.payment,
     required this.term,
     required this.lumpSum,
-    required this.interestRate,
   });
 
   @override
@@ -68,7 +66,7 @@ class AmortisationSchedule extends StatelessWidget {
                 ),
                 Align(
                   alignment: Alignment.topLeft,
-                  child: Text('Interest per period: $interestRate'),
+                  child: Text('Interest per period: ${calculateInterest()}'),
                 ),
                 Align(
                   alignment: Alignment.topLeft,

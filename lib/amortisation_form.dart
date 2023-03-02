@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'amortisation_schedule.dart';
-import 'calculate_interest_rate.dart';
 import 'package:intl/intl.dart';
 
 class MainForm extends StatefulWidget {
@@ -330,7 +329,6 @@ void transferDataToSchedule(BuildContext context) {
         payment: paymentAmount.text,
         term: numberOfPayments.text,
         lumpSum: lumpSumAmount.text,
-        interestRate: calculateInterest(),
       ),
     ),
   );
