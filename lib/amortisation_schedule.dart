@@ -86,6 +86,9 @@ class AmortisationSchedule extends StatelessWidget {
                   },
                   child: const Text('Back To Form'),
                 ),
+                Container(
+                  child: createSchedule(date, payment, loan),
+                ),
               ],
             ),
           ),
@@ -93,4 +96,38 @@ class AmortisationSchedule extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget createSchedule(date, payment, loan) {
+  return DataTable(
+    columns: const <DataColumn>[
+      DataColumn(
+        label: Text('Date'),
+      ),
+      DataColumn(
+        label: Text('Payment'),
+      ),
+      DataColumn(
+        label: Text('Interest'),
+      ),
+      DataColumn(
+        label: Text('Principal'),
+      ),
+      DataColumn(
+        label: Text('Balance'),
+      ),
+    ],
+    rows: <DataRow>[
+      DataRow(
+        cells: <DataCell>[
+          const DataCell(Text('Opening Balance')),
+          const DataCell(Text('')), //only value if there is upfront payment
+          const DataCell(Text('')),
+          const DataCell(Text('')),
+          DataCell(Text('$loan'))
+        ],
+      ),
+    ],
+  );
+   
 }

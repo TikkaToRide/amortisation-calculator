@@ -285,7 +285,7 @@ getDate({required BuildContext context}) async {
   );
   if (dateSelected != null) {
     return dateOfFirstPayment.text =
-        DateFormat('dd MMMM yyyy').format(dateSelected);
+        DateFormat('dd-MM-yyyy').format(dateSelected);
   }
 }
 
