@@ -134,7 +134,6 @@ class _AmortisationForm extends State<MainForm> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 8, vertical: 8),
-                      //This border is slightly to big
                       child: InputDecorator(
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
@@ -197,7 +196,6 @@ class _AmortisationForm extends State<MainForm> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 8, vertical: 8),
-                      //This border is slightly to big
                       child: InputDecorator(
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),

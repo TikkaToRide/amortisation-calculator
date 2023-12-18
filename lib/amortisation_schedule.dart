@@ -40,7 +40,7 @@ class AmortisationSchedule extends StatelessWidget {
                     padding: const EdgeInsets.all(10.0),
                     child: Text(
                       client.text + ' - ' + financier.text + ' - ' + asset.text,
-                      textScaleFactor: 1.5,
+                      textScaler: const TextScaler.linear(1.5),
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
@@ -129,5 +129,4 @@ Widget createSchedule(date, payment, loan) {
       ),
     ],
   );
-   
 }
