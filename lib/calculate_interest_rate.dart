@@ -6,10 +6,9 @@ This code is based on 'Answer' found at below link.
 https://stackoverflow.com/questions/3102476/calculating-annual-percentage-rate-need-some-help-with-inherited-code
 */
 
-//Values do not reset when form is reset - need to fix
-double principal = double.parse(loanAmount.text);
-double payment = double.parse(paymentAmount.text);
-int term = int.parse(numberOfPayments.text);
+double principal = 0.0;
+double payment = 0.0;
+int term = 0;
 
 double f(x) =>
     principal * x * pow((1 + x), term) / (pow((1 + x), term) - 1) - payment;
@@ -24,6 +23,10 @@ double fPrime(x) =>
         term * x * pow((1 + x), (-1 + term)) / (-1 + pow((1 + x), term)));
 
 double calculateInterest() {
+  principal = double.parse(loanAmount.text);
+  payment = double.parse(paymentAmount.text);
+  term = int.parse(numberOfPayments.text);
+
   var tolerableError = 0.00001;
   var currentGuess = 0.05 / paymentsPerYear;
   for (var i = 0; i < 20; i++) {

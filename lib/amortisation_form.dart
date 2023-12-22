@@ -1,3 +1,4 @@
+import 'package:amortisation_calculator/calculate_interest_rate.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'amortisation_schedule.dart';
@@ -242,7 +243,9 @@ class _AmortisationForm extends State<MainForm> {
                             paymentAmount.text == '' ||
                             numberOfPayments.text == '' ||
                             paymentsPerYear == null) {
-                          helpMessage(context);
+                          missingInformationMessage(context);
+                        } else if (calculateInterest() <= 0) {
+                          negativeInterestRateMessage(context);
                         } else {
                           transferDataToSchedule(context);
                         }
@@ -287,7 +290,7 @@ getDate({required BuildContext context}) async {
   }
 }
 
-helpMessage(context) {
+missingInformationMessage(context) {
   return showDialog(
     context: context,
     builder: (BuildContext context) => AlertDialog(
@@ -298,6 +301,21 @@ helpMessage(context) {
           onPressed: () => Navigator.pop(context, 'Close'),
           child: const Text('Close'),
         ),
+      ],
+    ),
+  );
+}
+
+negativeInterestRateMessage(context) {
+  return showDialog(
+    context: context,
+    builder: (BuildContext context) => AlertDialog(
+      title: const Text('Tip'),
+      content: const Text('Check Figures. Negative Interest Rate'),
+      actions: <Widget>[
+        TextButton(
+            onPressed: () => Navigator.pop(context, 'Ckose'),
+            child: const Text('Close'))
       ],
     ),
   );
