@@ -29,6 +29,7 @@ double calculateInterest() {
 
   var tolerableError = 0.00001;
   var currentGuess = 0.05 / paymentsPerYear;
+
   for (var i = 0; i < 20; i++) {
     var priorGuess = currentGuess;
     currentGuess = priorGuess - f(priorGuess) / fPrime(priorGuess);

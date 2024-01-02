@@ -47,44 +47,53 @@ class AmortisationSchedule extends StatelessWidget {
                 ),
                 Align(
                   alignment: Alignment.topLeft,
-                  child: Text('Loan Amount: $loan'),
+                  child: Text('   Loan Amount: $loan'),
                 ),
                 Align(
                   alignment: Alignment.topLeft,
-                  child: Text('Payment Amount: $payment'),
+                  child: Text('   Payment Amount: $payment'),
                 ),
                 Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    'Date of First Payment: $date',
+                    '   Date of First Payment: $date',
                   ),
                 ),
                 Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                      'Interest Rate: ${((calculateInterest() * paymentsPerYear) * 100).toStringAsFixed(2)}%'),
+                      '   Interest Rate: ${((calculateInterest() * paymentsPerYear) * 100).toStringAsFixed(2)}%'),
                 ),
                 Align(
                   alignment: Alignment.topLeft,
-                  child: Text('Interest per period: ${calculateInterest()}'),
+                  child: Text('   Interest per period: ${calculateInterest()}'),
                 ),
                 Align(
                   alignment: Alignment.topLeft,
-                  child: Text('Number of Payments: $term'),
+                  child: Text('   Number of Payments: $term'),
                 ),
                 Align(
                   alignment: Alignment.topLeft,
-                  child: Text('Lump Sum Amount: $lumpSum'),
+                  child: Text('   Lump Sum Amount: $lumpSum'),
                 ),
                 const Align(
                   alignment: Alignment.topLeft,
-                  child: Text('Lump Sum Type: '),
+                  child: Text('   Lump Sum Type: '),
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Back To Form'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text('Back To Form'),
+                    ),
+                    const ElevatedButton(
+                      onPressed: null,
+                      child: Text('   Print   '),
+                    ),
+                  ],
                 ),
                 Container(
                   child: createSchedule(date, payment, loan),
